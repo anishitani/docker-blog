@@ -1,0 +1,26 @@
+version: '2'
+
+
+services:
+  nginx:
+    image: nginx:alpine
+    ports:
+      - 8080:80
+    volumes:
+      - ./nginx/conf.d/:/etc/nginx/conf.d/
+    networks:
+      main:
+        aliases:
+          - nginx
+  blog:
+    image: ghost
+    volumes:
+      - ./ghost:/var/lib/ghost
+    networks:
+      main:
+        aliases:
+          - blog
+
+
+networks:
+  main:
